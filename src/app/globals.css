@@ -16,7 +16,7 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    /* Lenis handles smooth scrolling — do NOT set scroll-behavior here */
   }
 
   body {
@@ -32,7 +32,30 @@
   font-family: var(--font-playfair), Georgia, serif;
 }
 
-/* Apple/Vercel minimal buttons */
+/* ─── Scroll Reveal Animations ─── */
+.sr-element {
+  opacity: 0;
+  transform: var(--sr-transform, translateY(40px));
+  transition:
+    opacity var(--sr-duration, 0.7s) cubic-bezier(0.22, 1, 0.36, 1),
+    transform var(--sr-duration, 0.7s) cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.sr-element.sr-visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0);
+}
+
+/* ─── Stagger children animation helper ─── */
+.stagger-children > .sr-element:nth-child(1) { transition-delay: 0s; }
+.stagger-children > .sr-element:nth-child(2) { transition-delay: 0.1s; }
+.stagger-children > .sr-element:nth-child(3) { transition-delay: 0.2s; }
+.stagger-children > .sr-element:nth-child(4) { transition-delay: 0.3s; }
+.stagger-children > .sr-element:nth-child(5) { transition-delay: 0.4s; }
+.stagger-children > .sr-element:nth-child(6) { transition-delay: 0.5s; }
+
+/* ─── Apple/Vercel minimal buttons ─── */
 .btn-primary {
   display: inline-flex;
   align-items: center;

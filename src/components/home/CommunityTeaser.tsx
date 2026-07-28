@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Users, BookOpen, Calendar, ArrowRight } from "lucide-react";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const stats = [
   { value: "2,500+", label: "Anggota Aktif" },
@@ -23,7 +24,7 @@ export default function CommunityTeaser() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Image */}
-          <div className="lg:col-span-5">
+          <ScrollReveal direction="left" distance={50} duration={0.9} className="lg:col-span-5">
             <div className="relative h-[400px] sm:h-[480px] w-full rounded-2xl overflow-hidden shadow-sm border border-gray-200">
               <Image
                 src="/community.png"
@@ -33,10 +34,10 @@ export default function CommunityTeaser() {
                 sizes="(max-width: 1024px) 100vw, 40vw"
               />
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Copy */}
-          <div className="lg:col-span-7 space-y-6">
+          <ScrollReveal delay={0.15} direction="up" distance={30} className="lg:col-span-7 space-y-6">
             <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">
               Gerakan Berkelanjutan
             </span>
@@ -79,7 +80,7 @@ export default function CommunityTeaser() {
                 Program Sosial
               </Link>
             </div>
-          </div>
+          </ScrollReveal>
 
         </div>
       </div>

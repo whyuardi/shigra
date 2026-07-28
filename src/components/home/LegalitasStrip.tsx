@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ShieldCheck, FileText, FlaskConical, Clock, ArrowRight } from "lucide-react";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const certs = [
   { icon: FileText, code: "SNI", title: "Standar Nasional Indonesia", desc: "Standar keselamatan teknis" },
@@ -17,7 +18,7 @@ export default function LegalitasStrip() {
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-10">
 
           {/* Left Text */}
-          <div className="lg:w-1/3 space-y-3">
+          <ScrollReveal direction="up" distance={30} className="lg:w-1/3 space-y-3">
             <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">
               Transparansi Resmi
             </span>
@@ -33,7 +34,7 @@ export default function LegalitasStrip() {
             >
               Lihat Detail Dokumen <ArrowRight size={14} />
             </Link>
-          </div>
+          </ScrollReveal>
 
           {/* 4 Cards Grid */}
           <div className="lg:w-2/3 grid grid-cols-2 lg:grid-cols-4 gap-4">
