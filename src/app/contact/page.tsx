@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { MapPin, Mail, Phone, MessageSquare, Clock, ArrowRight, Building } from "lucide-react";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Kontak",
@@ -40,15 +41,17 @@ export default function ContactPage() {
       {/* Hero Header */}
       <section className="pt-20 pb-16 bg-[#f9fafb] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">
-            Hubungi Kami
-          </span>
-          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#0a2342] mt-2">
-            Mari Terhubung Bersama Tim Shigra
-          </h1>
-          <p className="text-gray-600 text-base mt-3 max-w-2xl leading-relaxed">
-            Pengelola lini produk Shigra (BGE Prambanan) siap menyambut pertanyaan seputar komunitas, detail produk, edukasi, atau program sosial.
-          </p>
+          <ScrollReveal direction="up" distance={30}>
+            <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">
+              Hubungi Kami
+            </span>
+            <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#0a2342] mt-2">
+              Mari Terhubung Bersama Tim Shigra
+            </h1>
+            <p className="text-gray-600 text-base mt-3 max-w-2xl leading-relaxed">
+              Pengelola lini produk Shigra (BGE Prambanan) siap menyambut pertanyaan seputar komunitas, detail produk, edukasi, atau program sosial.
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -57,7 +60,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* Info Column */}
-            <div className="lg:col-span-5 space-y-6">
+            <ScrollReveal direction="up" distance={30} className="lg:col-span-5 space-y-6">
               <div className="space-y-1">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">Informasi Akses</span>
                 <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0a2342]">Kantor BGE Prambanan</h2>
@@ -96,10 +99,10 @@ export default function ContactPage() {
                   Chat WhatsApp Sekarang <ArrowRight size={14} />
                 </a>
               </div>
-            </div>
+            </ScrollReveal>
 
             {/* Form Column */}
-            <div className="lg:col-span-7">
+            <ScrollReveal direction="up" distance={30} delay={0.15} className="lg:col-span-7">
               <div className="bg-[#f9fafb] p-6 sm:p-8 rounded-2xl border border-gray-200">
                 <h3 className="text-2xl font-bold text-[#0a2342] mb-1">Kirim Pesan</h3>
                 <p className="text-gray-600 text-xs sm:text-sm mb-6">Silakan isi formulir berikut. Tim Shigra akan merespons pesan Anda.</p>
@@ -176,7 +179,7 @@ export default function ContactPage() {
                   </button>
                 </form>
               </div>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>

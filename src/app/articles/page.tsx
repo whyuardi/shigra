@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Clock } from "lucide-react";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Artikel & Edukasi",
@@ -79,15 +80,17 @@ export default function ArticlesPage() {
       {/* Hero Header */}
       <section className="pt-20 pb-16 bg-[#f9fafb] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">
-            Artikel &amp; Edukasi
-          </span>
-          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#0a2342] mt-2">
-            Pengetahuan Adalah Dasar Keputusan Sehat
-          </h1>
-          <p className="text-gray-600 text-base mt-3 max-w-2xl leading-relaxed">
-            Seluruh sajian edukasi didasarkan pada data terverifikasi dan regulasi resmi — bukan janji manis pemasaran.
-          </p>
+          <ScrollReveal direction="up" distance={30}>
+            <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">
+              Artikel &amp; Edukasi
+            </span>
+            <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#0a2342] mt-2">
+              Pengetahuan Adalah Dasar Keputusan Sehat
+            </h1>
+            <p className="text-gray-600 text-base mt-3 max-w-2xl leading-relaxed">
+              Seluruh sajian edukasi didasarkan pada data terverifikasi dan regulasi resmi — bukan janji manis pemasaran.
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -95,46 +98,50 @@ export default function ArticlesPage() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           {/* Categories */}
-          <div className="flex flex-wrap gap-2 mb-10">
-            {categories.map((cat, idx) => (
-              <button
-                key={cat}
-                className={`px-4 py-2 text-xs font-semibold rounded-lg border transition-colors ${
-                  idx === 0
-                    ? "bg-[#0a2342] text-white border-[#0a2342]"
-                    : "bg-white text-gray-700 hover:bg-gray-100 border-gray-200"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
+          <ScrollReveal direction="up" distance={20}>
+            <div className="flex flex-wrap gap-2 mb-10">
+              {categories.map((cat, idx) => (
+                <button
+                  key={cat}
+                  className={`px-4 py-2 text-xs font-semibold rounded-lg border transition-colors ${
+                    idx === 0
+                      ? "bg-[#0a2342] text-white border-[#0a2342]"
+                      : "bg-white text-gray-700 hover:bg-gray-100 border-gray-200"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.map((art) => (
-              <article key={art.id} className="bg-[#f9fafb] p-6 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between space-y-4">
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between gap-4 text-xs">
-                    <span className="font-semibold text-[#2f6f5e] bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-100">
-                      {art.category}
-                    </span>
-                    <span className="text-gray-400 flex items-center gap-1">
-                      <Clock size={12} /> {art.readTime}
-                    </span>
+            {articles.map((art, idx) => (
+              <ScrollReveal key={art.id} delay={idx * 0.08} direction="up" distance={30}>
+                <article className="bg-[#f9fafb] p-6 rounded-2xl border border-gray-200 shadow-sm flex flex-col justify-between space-y-4 h-full">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between gap-4 text-xs">
+                      <span className="font-semibold text-[#2f6f5e] bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-100">
+                        {art.category}
+                      </span>
+                      <span className="text-gray-400 flex items-center gap-1">
+                        <Clock size={12} /> {art.readTime}
+                      </span>
+                    </div>
+                    <h2 className="font-bold text-[#0a2342] text-lg leading-snug hover:text-[#2f6f5e] transition-colors">
+                      {art.title}
+                    </h2>
+                    <p className="text-gray-600 text-sm leading-relaxed">{art.excerpt}</p>
                   </div>
-                  <h2 className="font-bold text-[#0a2342] text-lg leading-snug hover:text-[#2f6f5e] transition-colors">
-                    {art.title}
-                  </h2>
-                  <p className="text-gray-600 text-sm leading-relaxed">{art.excerpt}</p>
-                </div>
 
-                <div className="pt-4 border-t border-gray-200 flex items-center justify-between text-xs text-gray-500 font-medium">
-                  <span>{art.date}</span>
-                  <Link href={`/articles/${art.slug}`} className="font-bold text-[#0a2342] hover:text-[#2f6f5e] inline-flex items-center gap-1">
-                    Baca <ArrowRight size={12} />
-                  </Link>
-                </div>
-              </article>
+                  <div className="pt-4 border-t border-gray-200 flex items-center justify-between text-xs text-gray-500 font-medium">
+                    <span>{art.date}</span>
+                    <Link href={`/articles/${art.slug}`} className="font-bold text-[#0a2342] hover:text-[#2f6f5e] inline-flex items-center gap-1">
+                      Baca <ArrowRight size={12} />
+                    </Link>
+                  </div>
+                </article>
+              </ScrollReveal>
             ))}
           </div>
         </div>

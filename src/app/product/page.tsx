@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { AlertTriangle, CheckCircle2, Info, ArrowRight, Layers, Shield, Zap } from "lucide-react";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export const metadata: Metadata = {
   title: "Produk SM-S230XNA",
@@ -60,7 +61,7 @@ export default function ProductPage() {
       <section className="pt-20 pb-16 bg-[#f9fafb] border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7 space-y-4">
+            <ScrollReveal direction="up" distance={30} className="lg:col-span-7 space-y-4">
               <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">
                 Spesifikasi Unggulan
               </span>
@@ -89,9 +90,9 @@ export default function ProductPage() {
                   Status Legalitas
                 </Link>
               </div>
-            </div>
+            </ScrollReveal>
 
-            <div className="lg:col-span-5 flex justify-center">
+            <ScrollReveal direction="right" distance={40} delay={0.15} className="lg:col-span-5 flex justify-center">
               <div className="relative w-full max-w-sm h-80 sm:h-[420px] bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
                 <Image
                   src="/product-brochure.jpg"
@@ -102,7 +103,7 @@ export default function ProductPage() {
                   priority
                 />
               </div>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -110,18 +111,22 @@ export default function ProductPage() {
       {/* 6 Stage Filtration */}
       <section className="py-16 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">Teknologi Filtrasi</span>
-            <h2 className="text-3xl font-bold tracking-tight text-[#0a2342]">6 Tahap Filtrasi Komposit</h2>
-          </div>
+          <ScrollReveal direction="up" distance={30}>
+            <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">Teknologi Filtrasi</span>
+              <h2 className="text-3xl font-bold tracking-tight text-[#0a2342]">6 Tahap Filtrasi Komposit</h2>
+            </div>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filterStages.map((stage) => (
-              <div key={stage.num} className="bg-[#f9fafb] p-6 rounded-2xl border border-gray-200 space-y-3">
-                <span className="font-mono text-xs font-bold text-[#2f6f5e]">{stage.num}</span>
-                <h3 className="font-bold text-[#0a2342] text-lg">{stage.name}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{stage.desc}</p>
-              </div>
+            {filterStages.map((stage, idx) => (
+              <ScrollReveal key={stage.num} delay={idx * 0.1} direction="up" distance={30}>
+                <div className="bg-[#f9fafb] p-6 rounded-2xl border border-gray-200 space-y-3 h-full">
+                  <span className="font-mono text-xs font-bold text-[#2f6f5e]">{stage.num}</span>
+                  <h3 className="font-bold text-[#0a2342] text-lg">{stage.name}</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">{stage.desc}</p>
+                </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -130,54 +135,62 @@ export default function ProductPage() {
       {/* Specs Grid */}
       <section className="py-16 bg-[#f9fafb] border-b border-gray-200">
         <div className="max-w-5xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-10 space-y-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">Data Teknis</span>
-            <h2 className="text-3xl font-bold tracking-tight text-[#0a2342]">Spesifikasi Mesin</h2>
-          </div>
+          <ScrollReveal direction="up" distance={30}>
+            <div className="text-center mb-10 space-y-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">Data Teknis</span>
+              <h2 className="text-3xl font-bold tracking-tight text-[#0a2342]">Spesifikasi Mesin</h2>
+            </div>
 
-          <div className="bg-white rounded-2xl border border-gray-200 divide-y divide-gray-200 shadow-sm overflow-hidden">
-            {specs.map(({ label, value }) => (
-              <div key={label} className="grid grid-cols-1 sm:grid-cols-3 p-4 sm:p-5 hover:bg-gray-50 transition-colors">
-                <div className="text-sm font-bold text-[#0a2342]">{label}</div>
-                <div className="sm:col-span-2 text-sm text-gray-700">{value}</div>
-              </div>
-            ))}
-          </div>
+            <div className="bg-white rounded-2xl border border-gray-200 divide-y divide-gray-200 shadow-sm overflow-hidden">
+              {specs.map(({ label, value }) => (
+                <div key={label} className="grid grid-cols-1 sm:grid-cols-3 p-4 sm:p-5 hover:bg-gray-50 transition-colors">
+                  <div className="text-sm font-bold text-[#0a2342]">{label}</div>
+                  <div className="sm:col-span-2 text-sm text-gray-700">{value}</div>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* Transparency Section */}
       <section className="py-16 bg-white">
         <div className="max-w-5xl mx-auto px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">Transparansi Informasi</span>
-            <h2 className="text-3xl font-bold tracking-tight text-[#0a2342]">Batas Klaim Produk</h2>
-          </div>
+          <ScrollReveal direction="up" distance={30}>
+            <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">Transparansi Informasi</span>
+              <h2 className="text-3xl font-bold tracking-tight text-[#0a2342]">Batas Klaim Produk</h2>
+            </div>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-emerald-50/50 p-6 rounded-2xl border border-emerald-200 space-y-3">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 size={18} className="text-emerald-700" />
-                <h3 className="font-bold text-[#0a2342] text-base">Informasi Teknis (Klaim Resmi)</h3>
+            <ScrollReveal direction="up" distance={30} delay={0.1}>
+              <div className="bg-emerald-50/50 p-6 rounded-2xl border border-emerald-200 space-y-3 h-full">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 size={18} className="text-emerald-700" />
+                  <h3 className="font-bold text-[#0a2342] text-base">Informasi Teknis (Klaim Resmi)</h3>
+                </div>
+                <ul className="space-y-2 text-xs sm:text-sm text-gray-700">
+                  <li>• Penyaringan kontaminan hingga ukuran 0.01 Micron</li>
+                  <li>• Sistem daya SMPS 350W dan 12 plat titanium</li>
+                  <li>• Pengaturan pH air dari 2.5 hingga 12 untuk berbagai kebutuhan teknis</li>
+                </ul>
               </div>
-              <ul className="space-y-2 text-xs sm:text-sm text-gray-700">
-                <li>• Penyaringan kontaminan hingga ukuran 0.01 Micron</li>
-                <li>• Sistem daya SMPS 350W dan 12 plat titanium</li>
-                <li>• Pengaturan pH air dari 2.5 hingga 12 untuk berbagai kebutuhan teknis</li>
-              </ul>
-            </div>
+            </ScrollReveal>
 
-            <div className="bg-red-50/50 p-6 rounded-2xl border border-red-200 space-y-3">
-              <div className="flex items-center gap-2">
-                <Info size={18} className="text-red-700" />
-                <h3 className="font-bold text-[#0a2342] text-base">Hal yang TIDAK Diklaim</h3>
+            <ScrollReveal direction="up" distance={30} delay={0.2}>
+              <div className="bg-red-50/50 p-6 rounded-2xl border border-red-200 space-y-3 h-full">
+                <div className="flex items-center gap-2">
+                  <Info size={18} className="text-red-700" />
+                  <h3 className="font-bold text-[#0a2342] text-base">Hal yang TIDAK Diklaim</h3>
+                </div>
+                <ul className="space-y-2 text-xs sm:text-sm text-gray-700">
+                  <li>• Tidak diklaim menyembuhkan penyakit medis apapun</li>
+                  <li>• Bukan pengganti obat-obatan atau terapi medis profesional</li>
+                  <li>• Tidak menyampaikan klaim ajaib tanpa dukungan ilmiah terverifikasi</li>
+                </ul>
               </div>
-              <ul className="space-y-2 text-xs sm:text-sm text-gray-700">
-                <li>• Tidak diklaim menyembuhkan penyakit medis apapun</li>
-                <li>• Bukan pengganti obat-obatan atau terapi medis profesional</li>
-                <li>• Tidak menyampaikan klaim ajaib tanpa dukungan ilmiah terverifikasi</li>
-              </ul>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>

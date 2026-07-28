@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Clock, Calendar, Share2, Tag, ShieldCheck } from "lucide-react";
+import ScrollReveal from "@/components/ScrollReveal";
 
 interface ArticleData {
   slug: string;
@@ -134,67 +135,71 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
       {/* Article Header */}
       <header className="pt-20 pb-12 bg-[#f9fafb] border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 lg:px-8 space-y-4">
-          <Link
-            href="/articles"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-[#0a2342] transition-colors mb-2"
-          >
-            <ArrowLeft size={14} /> Kembali ke Semua Artikel
-          </Link>
+          <ScrollReveal direction="up" distance={20}>
+            <Link
+              href="/articles"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-[#0a2342] transition-colors mb-2"
+            >
+              <ArrowLeft size={14} /> Kembali ke Semua Artikel
+            </Link>
 
-          <div className="flex items-center gap-3">
-            <span className="text-xs font-bold text-[#2f6f5e] bg-emerald-50 px-3 py-1 rounded-md border border-emerald-100 uppercase tracking-wider">
-              {article.category}
-            </span>
-            <span className="text-xs text-gray-400 flex items-center gap-1">
-              <Clock size={12} /> {article.readTime}
-            </span>
-          </div>
+            <div className="flex items-center gap-3 mt-2">
+              <span className="text-xs font-bold text-[#2f6f5e] bg-emerald-50 px-3 py-1 rounded-md border border-emerald-100 uppercase tracking-wider">
+                {article.category}
+              </span>
+              <span className="text-xs text-gray-400 flex items-center gap-1">
+                <Clock size={12} /> {article.readTime}
+              </span>
+            </div>
 
-          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#0a2342] leading-tight">
-            {article.title}
-          </h1>
+            <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#0a2342] leading-tight mt-2">
+              {article.title}
+            </h1>
 
-          <div className="flex items-center gap-4 text-xs text-gray-500 pt-2">
-            <span className="flex items-center gap-1">
-              <Calendar size={13} /> {article.date}
-            </span>
-            <span>•</span>
-            <span>Oleh {article.author}</span>
-          </div>
+            <div className="flex items-center gap-4 text-xs text-gray-500 pt-2">
+              <span className="flex items-center gap-1">
+                <Calendar size={13} /> {article.date}
+              </span>
+              <span>•</span>
+              <span>Oleh {article.author}</span>
+            </div>
+          </ScrollReveal>
         </div>
       </header>
 
       {/* Article Body */}
       <main className="py-16 max-w-4xl mx-auto px-6 lg:px-8">
-        <div className="space-y-6 text-gray-700 text-base leading-relaxed">
-          {article.content.map((paragraph, idx) => (
-            <p key={idx}>{paragraph}</p>
-          ))}
-        </div>
+        <ScrollReveal direction="up" distance={30}>
+          <div className="space-y-6 text-gray-700 text-base leading-relaxed">
+            {article.content.map((paragraph, idx) => (
+              <p key={idx}>{paragraph}</p>
+            ))}
+          </div>
 
-        {/* Regulatory Disclaimer Box */}
-        <div className="mt-12 p-6 bg-[#f9fafb] rounded-2xl border border-gray-200 flex items-start gap-3">
-          <ShieldCheck size={20} className="text-[#2f6f5e] shrink-0 mt-0.5" />
-          <p className="text-xs text-gray-600 leading-relaxed">
-            <strong>Catatan Edukasi:</strong> Artikel ini diterbitkan oleh Komunitas Shigra untuk tujuan edukasi umum. Informasi di dalam artikel bukan merupakan saran atau pengobatan medis profesional.
-          </p>
-        </div>
+          {/* Regulatory Disclaimer Box */}
+          <div className="mt-12 p-6 bg-[#f9fafb] rounded-2xl border border-gray-200 flex items-start gap-3">
+            <ShieldCheck size={20} className="text-[#2f6f5e] shrink-0 mt-0.5" />
+            <p className="text-xs text-gray-600 leading-relaxed">
+              <strong>Catatan Edukasi:</strong> Artikel ini diterbitkan oleh Komunitas Shigra untuk tujuan edukasi umum. Informasi di dalam artikel bukan merupakan saran atau pengobatan medis profesional.
+            </p>
+          </div>
 
-        {/* Action Footer */}
-        <div className="mt-12 pt-8 border-t border-gray-200 flex items-center justify-between">
-          <Link
-            href="/articles"
-            className="btn-secondary text-xs py-2.5 px-5"
-          >
-            ← Artikel Lainnya
-          </Link>
-          <Link
-            href="/community"
-            className="btn-accent text-xs py-2.5 px-5"
-          >
-            Gabung Komunitas
-          </Link>
-        </div>
+          {/* Action Footer */}
+          <div className="mt-12 pt-8 border-t border-gray-200 flex items-center justify-between">
+            <Link
+              href="/articles"
+              className="btn-secondary text-xs py-2.5 px-5"
+            >
+              ← Artikel Lainnya
+            </Link>
+            <Link
+              href="/community"
+              className="btn-accent text-xs py-2.5 px-5"
+            >
+              Gabung Komunitas
+            </Link>
+          </div>
+        </ScrollReveal>
       </main>
     </article>
   );
