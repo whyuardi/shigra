@@ -70,16 +70,21 @@ export default function ContactPage() {
     const topicText = topicLabels[form.topic] || form.topic || "-";
     const fullName = [form.firstName, form.lastName].filter(Boolean).join(" ") || "-";
 
-    // Build a clean, formatted WhatsApp message
+    // Build a clean, professional WhatsApp message (no emoji — renders broken on some devices)
     const lines = [
-      "📩 *Pesan dari Website Shigra*",
+      "Halo Tim Shigra,",
       "",
-      `👤 *Nama:* ${fullName}`,
-      `📧 *Email:* ${form.email || "-"}`,
-      `📌 *Topik:* ${topicText}`,
+      "Perkenalkan, saya menghubungi melalui website Shigra.",
       "",
-      "💬 *Pesan:*",
+      "--- Data Pengirim ---",
+      `Nama  : ${fullName}`,
+      `Email : ${form.email || "-"}`,
+      `Topik : ${topicText}`,
+      "",
+      "--- Isi Pesan ---",
       form.message || "-",
+      "",
+      "Mohon respons-nya, terima kasih.",
     ];
 
     const text = encodeURIComponent(lines.join("\n"));
