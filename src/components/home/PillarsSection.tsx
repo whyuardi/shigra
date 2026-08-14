@@ -1,47 +1,50 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight, Clock, CheckCircle2 } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import ScrollReveal from "@/components/ScrollReveal";
 
-const pillars = [
-  {
-    id: "air",
-    num: "01",
-    label: "AIR",
-    title: "Udara Bersih",
-    status: "Segera Hadir",
-    isAvailable: false,
-    description: "Solusi filtrasi udara berteknologi tinggi untuk menghirup udara segar yang mendukung kesehatan dan konsentrasi.",
-    image: "/air-pillar.png",
-    href: "/#pillars",
-  },
-  {
-    id: "water",
-    num: "02",
-    label: "WATER",
-    title: "Air Berkualitas",
-    status: "Tersedia",
-    isAvailable: true,
-    description: "Mesin olah air SM-S230XNA dengan sistem filtrasi multi-tahap dan Hollow Fiber Membrane 0.01μm.",
-    image: "/water-pillar.png",
-    href: "/product",
-  },
-  {
-    id: "food",
-    num: "03",
-    label: "FOOD",
-    title: "Pangan Sehat",
-    status: "Segera Hadir",
-    isAvailable: false,
-    description: "Akses informasi, resep, dan pasokan pangan organik terpercaya untuk pemenuhan nutrisi harian keluarga.",
-    image: "/food-pillar.png",
-    href: "/#pillars",
-  },
-];
-
 export default function PillarsSection() {
+  const t = useTranslations("home.pillars");
+
+  const pillars = [
+    {
+      id: "air",
+      num: "01",
+      label: "AIR",
+      title: t("air.title"),
+      status: t("air.status"),
+      isAvailable: false,
+      description: t("air.description"),
+      image: "/air-pillar.png",
+      href: "/#pillars" as const,
+    },
+    {
+      id: "water",
+      num: "02",
+      label: "WATER",
+      title: t("water.title"),
+      status: t("water.status"),
+      isAvailable: true,
+      description: t("water.description"),
+      image: "/water-pillar.png",
+      href: "/product" as const,
+    },
+    {
+      id: "food",
+      num: "03",
+      label: "FOOD",
+      title: t("food.title"),
+      status: t("food.status"),
+      isAvailable: false,
+      description: t("food.description"),
+      image: "/food-pillar.png",
+      href: "/#pillars" as const,
+    },
+  ];
+
   return (
     <section id="pillars" className="py-20 lg:py-28 bg-white border-b border-gray-100">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -50,13 +53,13 @@ export default function PillarsSection() {
         <ScrollReveal direction="up" distance={30}>
           <div className="max-w-3xl mb-14 space-y-3">
             <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">
-              Ekosistem Mind, Body &amp; Soul
+              {t("badge")}
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#0a2342]">
-              Tiga Pilar Kesehatan Holistik
+              {t("title")}
             </h2>
             <p className="text-gray-600 text-base">
-              Kesehatan menyeluruh dimulai dari lingkungan yang bersih — udara, air, dan pangan yang Anda konsumsi.
+              {t("description")}
             </p>
           </div>
         </ScrollReveal>
@@ -103,11 +106,11 @@ export default function PillarsSection() {
                         href={pillar.href}
                         className="text-xs font-bold text-[#2f6f5e] hover:underline inline-flex items-center gap-1"
                       >
-                        Lihat Produk SM-S230XNA <ArrowRight size={12} />
+                        {t("viewProduct")} <ArrowRight size={12} />
                       </Link>
                     ) : (
                       <span className="text-xs text-gray-400 font-medium">
-                        Tahap Pengembangan
+                        {t("inDevelopment")}
                       </span>
                     )}
                   </div>

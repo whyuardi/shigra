@@ -1,20 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
-
-const navLinks = [
-  { href: "/", label: "Beranda" },
-  { href: "/about", label: "Tentang Kami" },
-  { href: "/product", label: "Produk" },
-  { href: "/community", label: "Komunitas" },
-  { href: "/articles", label: "Edukasi" },
-];
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import LanguageToggle from "./LanguageToggle";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const t = useTranslations("nav");
+
+  const navLinks = [
+    { href: "/" as const, label: t("home") },
+    { href: "/about" as const, label: t("about") },
+    { href: "/product" as const, label: t("product") },
+    { href: "/community" as const, label: t("community") },
+    { href: "/articles" as const, label: t("articles") },
+  ];
 
   return (
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-200">
@@ -44,22 +47,26 @@ export default function Navbar() {
 
         {/* Action Buttons */}
         <div className="hidden md:flex items-center gap-3">
+          <LanguageToggle />
           <Link href="/contact" className="btn-secondary text-xs py-2 px-4">
-            Kontak
+            {t("contact")}
           </Link>
           <Link href="/community" className="btn-accent text-xs py-2 px-4">
-            Gabung Komunitas
+            {t("joinCommunity")}
           </Link>
         </div>
 
         {/* Mobile Toggle Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 text-gray-700 hover:text-[#0a2342]"
-          aria-label="Toggle Navigation"
-        >
-          {isOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="md:hidden flex items-center gap-2">
+          <LanguageToggle />
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="p-2 text-gray-700 hover:text-[#0a2342]"
+            aria-label="Toggle Navigation"
+          >
+            {isOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </nav>
 
       {/* Mobile Drawer */}
@@ -81,14 +88,14 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
               className="btn-secondary w-full text-center text-xs py-2.5"
             >
-              Kontak
+              {t("contact")}
             </Link>
             <Link
               href="/community"
               onClick={() => setIsOpen(false)}
               className="btn-accent w-full text-center text-xs py-2.5"
             >
-              Gabung Komunitas
+              {t("joinCommunity")}
             </Link>
           </div>
         </div>

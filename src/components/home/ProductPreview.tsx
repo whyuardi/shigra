@@ -1,40 +1,31 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { Layers, Shield, Zap, ArrowRight, AlertTriangle } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import ScrollReveal from "@/components/ScrollReveal";
 
-const specs = [
-  { value: "12 Plat", label: "Titanium Solid (SP+7P)" },
-  { value: "Dual Filter", label: "Sistem Komposit" },
-  { value: "350W", label: "SMPS Power Control" },
-  { value: "pH 2.5 – 12", label: "Rentang pH Air" },
-  { value: "RFID Chip", label: "Filter Otentik" },
-  { value: "0.01 Micron", label: "UF Membrane" },
-];
-
-const features = [
-  {
-    icon: Layers,
-    title: "6-Stage Multi Filtration",
-    desc: "Serat komposit, kasa mesh, tourmaline, kalsium, karbon aktif, dan membran UF menyaring kontaminan secara bertahap.",
-  },
-  {
-    icon: Shield,
-    title: "Hollow Fiber Membrane",
-    desc: "Menyaring partikel mikroskopis hingga 0.01μm tanpa menghilangkan kandungan mineral alami penting dalam air.",
-  },
-  {
-    icon: Zap,
-    title: "350W SMPS Technology",
-    desc: "Sistem pengatur daya presisi tinggi menghasilkan stabilitas kerja mesin dan efisiensi energi yang optimal.",
-  },
-];
-
 export default function ProductPreview() {
+  const t = useTranslations("home.product");
+
+  const specs = [
+    { value: "12 Plat", label: t("spec1Label") },
+    { value: "Dual Filter", label: t("spec2Label") },
+    { value: "350W", label: t("spec3Label") },
+    { value: "pH 2.5 – 12", label: t("spec4Label") },
+    { value: "RFID Chip", label: t("spec5Label") },
+    { value: "0.01 Micron", label: t("spec6Label") },
+  ];
+
+  const features = [
+    { icon: Layers, title: t("feature1Title"), desc: t("feature1Desc") },
+    { icon: Shield, title: t("feature2Title"), desc: t("feature2Desc") },
+    { icon: Zap, title: t("feature3Title"), desc: t("feature3Desc") },
+  ];
+
   return (
-    <section className="py-20 lg:py-28 bg-[#f9fafb] border-b border-gray-200" aria-label="Produk SM-S230XNA">
+    <section className="py-20 lg:py-28 bg-[#f9fafb] border-b border-gray-200" aria-label="SM-S230XNA">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         
         {/* Header */}
@@ -42,22 +33,22 @@ export default function ProductPreview() {
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14 pb-8 border-b border-gray-200">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">
-                Produk Ekosistem Shigra
+                {t("badge")}
               </span>
               <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#0a2342] mt-1">
                 SM-S230XNA Water Machine
               </h2>
               <p className="text-gray-600 text-base mt-2 max-w-xl">
-                Mesin olah air minum presisi tinggi dengan teknologi filtrasi multi-tahap.
+                {t("description")}
               </p>
             </div>
 
             <div className="flex flex-wrap gap-3">
               <Link href="/product" className="btn-accent text-xs py-2.5 px-5">
-                Detail Spesifikasi <ArrowRight size={14} />
+                {t("detailSpecs")} <ArrowRight size={14} />
               </Link>
               <Link href="/contact" className="btn-secondary text-xs py-2.5 px-5">
-                Konsultasi
+                {t("consultation")}
               </Link>
             </div>
           </div>
@@ -84,7 +75,7 @@ export default function ProductPreview() {
               <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl flex items-start gap-3">
                 <AlertTriangle size={18} className="text-amber-600 shrink-0 mt-0.5" />
                 <p className="text-amber-900 text-xs leading-relaxed">
-                  <strong>Catatan Regulasi:</strong> Produk ini adalah perangkat pengolah air minum. Shigra tidak membuat klaim kesehatan atau klaim medis yang tidak didukung bukti terverifikasi.
+                  <strong>{t("regulatoryNote")}</strong> {t("regulatoryText")}
                 </p>
               </div>
             </ScrollReveal>

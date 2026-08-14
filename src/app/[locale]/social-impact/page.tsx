@@ -1,49 +1,60 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Heart, Users, MapPin, ArrowRight } from "lucide-react";
+import { Heart, Users, MapPin } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import ScrollReveal from "@/components/ScrollReveal";
 
-export const metadata: Metadata = {
-  title: "Social Impact",
-  description:
-    "Program sosial Shigra: makan gratis, subsidi air bersih, dan komunitas binaan desa. Komitmen nyata untuk masyarakat Indonesia.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "socialImpact" });
 
-const programs = [
-  {
-    icon: Heart,
-    num: "500+",
-    subtitle: "Makan Bergizi Bulanan",
-    title: "Program Edukasi & Pangan Bergizi",
-    desc: "Menyediakan santapan bergizi seimbang setiap bulan untuk masyarakat yang membutuhkan di sekitar wilayah kerja komunitas Shigra.",
-    detail: "Bekerja sama dengan petani organik lokal untuk memastikan kualitas nutrisi sekaligus memberdayakan ekonomi lokal.",
-  },
-  {
-    icon: Users,
-    num: "120",
-    subtitle: "Keluarga Terbantu",
-    title: "Subsidi Akses Air Bersih",
-    desc: "Program subsidi penyediaan fasilitas dan filtrasi air bersih bagi keluarga prasejahtera.",
-    detail: "Proses pendataan dilakukan secara terbuka bersama perangkat desa/kelurahan setempat agar bantuan tepat sasaran.",
-  },
-  {
-    icon: MapPin,
-    num: "8",
-    subtitle: "Desa Binaan",
-    title: "Program Pendampingan Desa Sehat",
-    desc: "Mendampingi desa-desa terpilih dalam membangun sistem sanitasi, pengelolaan air bersih, dan kebun gizi mandiri.",
-    detail: "Mendorong kemandirian warga desa melalui pelatihan berkelanjutan dan pendampingan lapangan.",
-  },
-];
-
-const stats = [
-  { value: "500+", label: "Porsi Pangan Bergizi / Bulan" },
-  { value: "120", label: "Keluarga Subsidi Air Bersih" },
-  { value: "8", label: "Desa Binaan Aktif" },
-  { value: "100%", label: "Transparansi Audit Sosial" },
-];
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+  };
+}
 
 export default function SocialImpactPage() {
+  const t = useTranslations("socialImpact");
+
+  const programs = [
+    {
+      icon: Heart,
+      num: "500+",
+      subtitle: t("program1Subtitle"),
+      title: t("program1Title"),
+      desc: t("program1Desc"),
+      detail: t("program1Detail"),
+    },
+    {
+      icon: Users,
+      num: "120",
+      subtitle: t("program2Subtitle"),
+      title: t("program2Title"),
+      desc: t("program2Desc"),
+      detail: t("program2Detail"),
+    },
+    {
+      icon: MapPin,
+      num: "8",
+      subtitle: t("program3Subtitle"),
+      title: t("program3Title"),
+      desc: t("program3Desc"),
+      detail: t("program3Detail"),
+    },
+  ];
+
+  const stats = [
+    { value: "500+", label: t("stat1Label") },
+    { value: "120", label: t("stat2Label") },
+    { value: "8", label: t("stat3Label") },
+    { value: "100%", label: t("stat4Label") },
+  ];
+
   return (
     <div className="bg-white min-h-screen text-[#0a2342]">
       {/* Hero Header */}
@@ -51,13 +62,13 @@ export default function SocialImpactPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <ScrollReveal direction="up" distance={30}>
             <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">
-              Social Impact
+              {t("badge")}
             </span>
             <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#0a2342] mt-2">
-              Tanggung Jawab Sosial Adalah Misi Utama
+              {t("title")}
             </h1>
             <p className="text-gray-600 text-base mt-3 max-w-2xl leading-relaxed">
-              Bagi Shigra, keberadaan bisnis harus membawa manfaat konkrit bagi lingkungan dan sesama. Program sosial kami bukan pelengkap — melainkan alasan utama mengapa kami berdiri.
+              {t("description")}
             </p>
           </ScrollReveal>
         </div>

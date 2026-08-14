@@ -1,82 +1,86 @@
 import type { Metadata } from "next";
 import { Clock, FileText, FlaskConical, Info, ShieldCheck, AlertCircle, ExternalLink } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import ScrollReveal from "@/components/ScrollReveal";
 
-export const metadata: Metadata = {
-  title: "Legalitas & Sertifikasi",
-  description:
-    "Dokumen legalitas dan sertifikasi resmi produk Shigra. Kami berkomitmen pada transparansi penuh — hanya menampilkan sertifikasi yang benar-benar telah diperoleh.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "legalitas" });
 
-const certifications = [
-  {
-    icon: FileText,
-    code: "SNI",
-    title: "Standar Nasional Indonesia",
-    authority: "Badan Standardisasi Nasional (BSN)",
-    description:
-      "Sertifikasi SNI memastikan produk memenuhi standar keselamatan dan kualitas teknis yang ditetapkan pemerintah Republik Indonesia.",
-    statusLabel: "Proses Pengujian",
-    note:
-      "Shigra sedang menjalani prosedur pengujian berkala. Dokumen resmi akan ditampilkan utuh setelah seluruh tahapan selesai.",
-  },
-  {
-    icon: ShieldCheck,
-    code: "BPOM",
-    title: "Izin Edar BPOM",
-    authority: "Badan Pengawas Obat dan Makanan RI",
-    description:
-      "Izin edar BPOM wajib dimiliki oleh perangkat yang berhubungan dengan air minum untuk menjamin keamanan dan mencegah klaim medis yang menyesatkan.",
-    statusLabel: "Proses Perizinan",
-    note:
-      "Proses pendaftaran dan perizinan sedang berjalan sesuai ketentuan. Shigra mematuhi batasan bahwa tidak ada klaim kesehatan sebelum perizinan resmi terbit.",
-  },
-  {
-    icon: FlaskConical,
-    code: "LAB TEST",
-    title: "Hasil Uji Laboratorium Independen",
-    authority: "Laboratorium Terakreditasi KAN",
-    description:
-      "Pengujian kualitas air dan kemampuan filtrasi oleh laboratorium independen terakreditasi untuk memverifikasi data spesifikasi secara objektif.",
-    statusLabel: "Pengujian Berlangsung",
-    note:
-      "Laporan hasil uji laboratorium akan dipublikasikan secara terbuka agar dapat diakses oleh publik.",
-  },
-  {
-    icon: Info,
-    code: "ISO",
-    title: "Sertifikasi Sistem Manajemen",
-    authority: "International Organization for Standardization",
-    description:
-      "Sertifikasi ISO menjamin standar kelayakan manufaktur dan manajemen mutu produk skala internasional.",
-    statusLabel: "Tahap Evaluasi",
-    note:
-      "Proses evaluasi dokumen sertifikasi internasional sedang dijalankan bersama mitra manufaktur.",
-  },
-];
-
-const regulatoryRefs = [
-  {
-    title: "Klarifikasi BPOM Mengenai Alat Olah Air",
-    source: "Badan POM RI",
-    url: "https://www.pom.go.id",
-    desc: "BPOM menegaskan bahwa alat pemroses air tidak boleh mengklaim dapat mengobati penyakit secara ajaib. Shigra mendukung penuh prinsip ini.",
-  },
-  {
-    title: "Standar SNI Air Minum & Perangkat",
-    source: "Badan Standardisasi Nasional (BSN)",
-    url: "https://bsn.go.id",
-    desc: "Ketentuan acuan kualitas teknis dan standar keamanan perangkat di Indonesia.",
-  },
-  {
-    title: "Peraturan Kementerian Kesehatan RI",
-    source: "Kemenkes RI",
-    url: "https://kemkes.go.id",
-    desc: "Pedoman persyaratan kualitas air minum dan higienitas lingkungan.",
-  },
-];
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+  };
+}
 
 export default function LegalitasPage() {
+  const t = useTranslations("legalitas");
+
+  const certifications = [
+    {
+      icon: FileText,
+      code: "SNI",
+      title: t("sniTitle"),
+      authority: t("sniAuthority"),
+      description: t("sniDesc"),
+      statusLabel: t("sniStatus"),
+      note: t("sniNote"),
+    },
+    {
+      icon: ShieldCheck,
+      code: "BPOM",
+      title: t("bpomTitle"),
+      authority: t("bpomAuthority"),
+      description: t("bpomDesc"),
+      statusLabel: t("bpomStatus"),
+      note: t("bpomNote"),
+    },
+    {
+      icon: FlaskConical,
+      code: "LAB TEST",
+      title: t("labTitle"),
+      authority: t("labAuthority"),
+      description: t("labDesc"),
+      statusLabel: t("labStatus"),
+      note: t("labNote"),
+    },
+    {
+      icon: Info,
+      code: "ISO",
+      title: t("isoTitle"),
+      authority: t("isoAuthority"),
+      description: t("isoDesc"),
+      statusLabel: t("isoStatus"),
+      note: t("isoNote"),
+    },
+  ];
+
+  const regulatoryRefs = [
+    {
+      title: t("ref1Title"),
+      source: t("ref1Source"),
+      url: "https://www.pom.go.id",
+      desc: t("ref1Desc"),
+    },
+    {
+      title: t("ref2Title"),
+      source: t("ref2Source"),
+      url: "https://bsn.go.id",
+      desc: t("ref2Desc"),
+    },
+    {
+      title: t("ref3Title"),
+      source: t("ref3Source"),
+      url: "https://kemkes.go.id",
+      desc: t("ref3Desc"),
+    },
+  ];
+
   return (
     <div className="bg-white min-h-screen text-[#0a2342]">
       {/* Hero Header */}
@@ -84,13 +88,13 @@ export default function LegalitasPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <ScrollReveal direction="up" distance={30}>
             <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">
-              Legalitas &amp; Sertifikasi
+              {t("badge")}
             </span>
             <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#0a2342] mt-2">
-              Transparansi Tanpa Kompromi
+              {t("title")}
             </h1>
             <p className="text-gray-600 text-base mt-3 max-w-2xl leading-relaxed">
-              Kami hanya menyampaikan status hukum yang jujur. Dokumen resmi ditampilkan secara terbuka setelah seluruh proses perizinan selesai.
+              {t("description")}
             </p>
           </ScrollReveal>
         </div>
@@ -103,10 +107,8 @@ export default function LegalitasPage() {
             <div className="flex items-start gap-4">
               <AlertCircle size={20} className="text-amber-700 shrink-0 mt-0.5" />
               <div className="space-y-1 text-xs sm:text-sm text-amber-900 leading-relaxed">
-                <h2 className="font-bold text-amber-950 text-base">Komitmen Kejujuran Status Dokumen</h2>
-                <p>
-                  Label <strong>"Proses Pengujian/Perizinan"</strong> menandakan bahwa kami sedang menempuh jalur administrasi resmi. Shigra tidak mencantumkan badge sertifikasi palsu tanpa didasari dokumen verifikasi sah.
-                </p>
+                <h2 className="font-bold text-amber-950 text-base">{t("warningTitle")}</h2>
+                <p>{t("warningText")}</p>
               </div>
             </div>
           </ScrollReveal>
@@ -139,7 +141,7 @@ export default function LegalitasPage() {
                   <p className="text-xs font-semibold uppercase tracking-wider text-gray-500">{authority}</p>
                   <p className="text-gray-700 text-sm leading-relaxed">{description}</p>
                   <div className="bg-white p-4 rounded-xl border border-gray-200 text-xs text-gray-800">
-                    <strong className="text-[#0a2342]">Status Aktual:</strong> {note}
+                    <strong className="text-[#0a2342]">{t("actualStatus")}</strong> {note}
                   </div>
                 </div>
               </div>
@@ -153,8 +155,8 @@ export default function LegalitasPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <ScrollReveal direction="up" distance={30}>
             <div className="mb-10 space-y-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">Regulasi Resmi</span>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0a2342]">Referensi Hukum</h2>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">{t("refsBadge")}</span>
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0a2342]">{t("refsTitle")}</h2>
             </div>
           </ScrollReveal>
 
@@ -173,7 +175,7 @@ export default function LegalitasPage() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 text-xs font-bold text-[#0a2342] hover:text-[#2f6f5e] hover:underline"
                   >
-                    Situs Resmi <ExternalLink size={12} />
+                    {t("officialSite")} <ExternalLink size={12} />
                   </a>
                 </div>
               </ScrollReveal>

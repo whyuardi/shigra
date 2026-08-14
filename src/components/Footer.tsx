@@ -1,26 +1,8 @@
-import Link from "next/link";
-import Image from "next/image";
+"use client";
 
-const footerLinks = {
-  PERUSAHAAN: [
-    { href: "/about", label: "Tentang Shigra" },
-    { href: "/legalitas", label: "Legalitas & Sertifikasi" },
-    { href: "/social-impact", label: "Social Impact" },
-    { href: "/contact", label: "Kontak Kami" },
-  ],
-  EKOSISTEM: [
-    { href: "/product", label: "SM-S230XNA Water Machine" },
-    { href: "/articles", label: "Artikel Edukasi" },
-    { href: "/community", label: "Community Hub" },
-    { href: "/#pillars", label: "Mind, Body & Soul" },
-  ],
-  INFORMASI: [
-    { href: "/articles", label: "Air Purifier (Edukasi)" },
-    { href: "/articles", label: "Kualitas Air Minum" },
-    { href: "/articles", label: "Pangan Organik Sehat" },
-    { href: "/social-impact", label: "Program Subsidi Air" },
-  ],
-};
+import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 const socialLinks = [
   {
@@ -63,6 +45,28 @@ const socialLinks = [
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const t = useTranslations("footer");
+
+  const footerLinks = {
+    [t("company")]: [
+      { href: "/about" as const, label: t("aboutShigra") },
+      { href: "/legalitas" as const, label: t("legality") },
+      { href: "/social-impact" as const, label: t("socialImpact") },
+      { href: "/contact" as const, label: t("contactUs") },
+    ],
+    [t("ecosystem")]: [
+      { href: "/product" as const, label: t("waterMachine") },
+      { href: "/articles" as const, label: t("educationArticles") },
+      { href: "/community" as const, label: t("communityHub") },
+      { href: "/#pillars" as const, label: t("mindBodySoul") },
+    ],
+    [t("information")]: [
+      { href: "/articles" as const, label: t("airPurifier") },
+      { href: "/articles" as const, label: t("waterQuality") },
+      { href: "/articles" as const, label: t("organicFood") },
+      { href: "/social-impact" as const, label: t("waterSubsidy") },
+    ],
+  };
 
   return (
     <footer className="bg-[#0a2342] text-white">
@@ -83,12 +87,12 @@ export default function Footer() {
             </Link>
 
             <p className="text-white/70 text-sm leading-relaxed max-w-sm">
-              Platform komunitas gaya hidup sehat berbasis tiga pilar: udara bersih, air berkualitas, dan pangan sehat.
+              {t("description")}
             </p>
 
             <div className="pt-2 text-xs text-white/50 space-y-1">
-              <p>Pengelola Lini Produk: BGE Prambanan</p>
-              <p>Lokasi: Indonesia</p>
+              <p>{t("operator")}</p>
+              <p>{t("location")}</p>
               <p>Email: ceo@benuagreen.com</p>
               <p>WhatsApp: +62 817-6779-719</p>
             </div>
@@ -137,9 +141,9 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-white/10 py-6 bg-black/20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/40">
-          <p>© {year} SHIGRA. Seluruh hak cipta dilindungi undang-undang.</p>
+          <p>{t("copyright", { year })}</p>
           <p className="text-center md:text-right">
-            Konten bersifat edukatif dan bukan merupakan klaim medis atau janji pengobatan.
+            {t("disclaimer")}
           </p>
         </div>
       </div>

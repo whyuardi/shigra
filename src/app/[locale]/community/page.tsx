@@ -1,61 +1,73 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { Users, MessageSquare, BookOpen, Calendar, ArrowRight, Heart, ShieldCheck } from "lucide-react";
+import { MessageSquare, BookOpen, Calendar, ArrowRight, Heart, ShieldCheck } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import ScrollReveal from "@/components/ScrollReveal";
 
-export const metadata: Metadata = {
-  title: "Komunitas",
-  description:
-    "Bergabunglah dengan komunitas Shigra — ruang berbagi, belajar, dan bertumbuh bersama dalam gaya hidup sehat yang berkelanjutan.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "community" });
 
-const features = [
-  {
-    icon: MessageSquare,
-    num: "01",
-    title: "Forum Diskusi Terbuka",
-    desc: "Ruang berbagi pengalaman dan bertanya seputar pola hidup sehat secara rasional dan objektif.",
-  },
-  {
-    icon: BookOpen,
-    num: "02",
-    title: "Perpustakaan Edukasi",
-    desc: "Akses artikel, riset terverifikasi, dan panduan praktis dari sumber independen terpercaya.",
-  },
-  {
-    icon: Calendar,
-    num: "03",
-    title: "Webinar & Sesi Berbagi",
-    desc: "Pertemuan berkala secara daring maupun luring bersama para praktisi dan akademisi.",
-  },
-  {
-    icon: Heart,
-    num: "04",
-    title: "Program Dampak Sosial",
-    desc: "Keterlibatan aktif dalam penyediaan pangan bergizi dan subsidi akses air bersih masyarakat.",
-  },
-];
-
-const testimonials = [
-  {
-    name: "Rina S.",
-    role: "Anggota Komunitas",
-    text: "Yang paling saya hargai dari Shigra adalah kejujurannya. Tidak ada tekanan pembelian atau janji berlebihan. Diskusi fokus pada fakta edukatif.",
-  },
-  {
-    name: "Budi W.",
-    role: "Praktisi Kesehatan Lingkungan",
-    text: "Melihat komunitas yang fokus pada pemahaman filtrasi air dan kualitas udara secara ilmiah sangat menyegarkan. Inisiatif yang sangat positif.",
-  },
-  {
-    name: "Sari M.",
-    role: "Penerima Manfaat Program Sosial",
-    text: "Program sosial air bersih dan edukasi pangan sehat sangat membantu keluarga kami memahami pentingnya air dan makanan berkualitas.",
-  },
-];
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+  };
+}
 
 export default function CommunityPage() {
+  const t = useTranslations("community");
+
+  const features = [
+    {
+      icon: MessageSquare,
+      num: "01",
+      title: t("feature1Title"),
+      desc: t("feature1Desc"),
+    },
+    {
+      icon: BookOpen,
+      num: "02",
+      title: t("feature2Title"),
+      desc: t("feature2Desc"),
+    },
+    {
+      icon: Calendar,
+      num: "03",
+      title: t("feature3Title"),
+      desc: t("feature3Desc"),
+    },
+    {
+      icon: Heart,
+      num: "04",
+      title: t("feature4Title"),
+      desc: t("feature4Desc"),
+    },
+  ];
+
+  const testimonials = [
+    {
+      name: t("testimonial1Name"),
+      role: t("testimonial1Role"),
+      text: t("testimonial1Text"),
+    },
+    {
+      name: t("testimonial2Name"),
+      role: t("testimonial2Role"),
+      text: t("testimonial2Text"),
+    },
+    {
+      name: t("testimonial3Name"),
+      role: t("testimonial3Role"),
+      text: t("testimonial3Text"),
+    },
+  ];
+
   return (
     <div className="bg-white min-h-screen text-[#0a2342]">
       {/* Hero Header */}
@@ -63,17 +75,17 @@ export default function CommunityPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <ScrollReveal direction="up" distance={30}>
             <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">
-              Komunitas Shigra
+              {t("badge")}
             </span>
             <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#0a2342] mt-2">
-              Tumbuh Bersama Tanpa Hard Selling
+              {t("title")}
             </h1>
             <p className="text-gray-600 text-base mt-3 max-w-2xl leading-relaxed">
-              Komunitas Shigra menghadirkan ruang kolaboratif untuk belajar, berbagi pengetahuan, dan saling mendukung dalam mencapai kualitas hidup yang lebih sehat.
+              {t("description")}
             </p>
             <div className="pt-4">
               <Link href="/contact" className="btn-accent text-xs py-2.5 px-6">
-                Gabung Komunitas (Gratis) <ArrowRight size={14} />
+                {t("joinFree")} <ArrowRight size={14} />
               </Link>
             </div>
           </ScrollReveal>
@@ -85,8 +97,8 @@ export default function CommunityPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <ScrollReveal direction="up" distance={30}>
             <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">Manfaat Komunitas</span>
-              <h2 className="text-3xl font-bold tracking-tight text-[#0a2342]">Apa yang Anda Dapatkan</h2>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">{t("benefitsBadge")}</span>
+              <h2 className="text-3xl font-bold tracking-tight text-[#0a2342]">{t("benefitsTitle")}</h2>
             </div>
           </ScrollReveal>
 
@@ -126,16 +138,16 @@ export default function CommunityPage() {
             </ScrollReveal>
 
             <ScrollReveal direction="up" distance={30} delay={0.15} className="lg:col-span-6 space-y-4">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">Prinsip Komunitas</span>
-              <h2 className="text-3xl font-bold tracking-tight text-[#0a2342]">Komunitas Tanpa Hard Selling</h2>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">{t("principlesBadge")}</span>
+              <h2 className="text-3xl font-bold tracking-tight text-[#0a2342]">{t("principlesTitle")}</h2>
               <p className="text-gray-600 text-base leading-relaxed">
-                Kami secara ketat menjaga komunitas Shigra agar bebas dari intimidasi jualan atau promosi agresif. Fokus utama kami adalah edukasi dan saling bantu sesama anggota.
+                {t("principlesDesc")}
               </p>
               <ul className="space-y-2 pt-2">
                 {[
-                  "Diskusi berbasis data dan penelitian obyektif",
-                  "Moderasi aktif untuk menjaga kenyamanan anggota",
-                  "Transparansi penuh mengenai produk dan sains pendukung",
+                  t("principle1"),
+                  t("principle2"),
+                  t("principle3"),
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-gray-700 font-medium">
                     <ShieldCheck size={16} className="text-[#2f6f5e] shrink-0" />
@@ -153,8 +165,8 @@ export default function CommunityPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <ScrollReveal direction="up" distance={30}>
             <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">Suara Anggota</span>
-              <h2 className="text-3xl font-bold tracking-tight text-[#0a2342]">Pengalaman di Komunitas</h2>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">{t("testimonialsBadge")}</span>
+              <h2 className="text-3xl font-bold tracking-tight text-[#0a2342]">{t("testimonialsTitle")}</h2>
             </div>
           </ScrollReveal>
 

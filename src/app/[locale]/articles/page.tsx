@@ -1,80 +1,93 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ArrowRight, Clock } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import ScrollReveal from "@/components/ScrollReveal";
 
-export const metadata: Metadata = {
-  title: "Artikel & Edukasi",
-  description:
-    "Konten edukasi seputar kualitas udara, air bersih, dan pangan sehat dari komunitas Shigra. Informasi berbasis fakta, bukan klaim pemasaran.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "articles" });
 
-const categories = ["Semua", "Kualitas Air", "Udara Bersih", "Pangan Sehat", "Gaya Hidup", "Regulasi"];
-
-const articles = [
-  {
-    id: 1,
-    category: "Kualitas Air",
-    title: "Memahami Sistem Filtrasi Air: Apa yang Perlu Anda Ketahui",
-    excerpt:
-      "Tidak semua sistem filtrasi air bekerja sama. Artikel ini menjelaskan berbagai teknologi filtrasi di pasaran secara objektif berdasarkan standar teknis.",
-    readTime: "5 min baca",
-    date: "15 Juli 2026",
-    slug: "memahami-sistem-filtrasi-air",
-  },
-  {
-    id: 2,
-    category: "Udara Bersih",
-    title: "Polutan Udara Dalam Ruangan: Fakta dan Cara Mengatasinya",
-    excerpt:
-      "Udara dalam ruangan bisa mengandung polutan lebih tinggi dari udara luar. Pelajari sumber-sumber polutan dan langkah pencegahan teruji.",
-    readTime: "7 min baca",
-    date: "10 Juli 2026",
-    slug: "polutan-udara-dalam-ruangan",
-  },
-  {
-    id: 3,
-    category: "Pangan Sehat",
-    title: "Panduan Memilih Pangan Organik: Tips Praktis untuk Keluarga",
-    excerpt:
-      "Memahami label, sertifikasi, dan prioritas belanja pangan sehat untuk keluarga tanpa terjebak gimik pemasaran.",
-    readTime: "6 min baca",
-    date: "5 Juli 2026",
-    slug: "panduan-memilih-pangan-organik",
-  },
-  {
-    id: 4,
-    category: "Regulasi",
-    title: "Memahami Regulasi BPOM untuk Produk Olah Air Minum",
-    excerpt:
-      "Penjelasan aturan resmi BPOM mengenai izin edar dan batas klaim produk olah air minum di Indonesia.",
-    readTime: "8 min baca",
-    date: "1 Juli 2026",
-    slug: "regulasi-bpom-produk-air-minum",
-  },
-  {
-    id: 5,
-    category: "Gaya Hidup",
-    title: "Hidrasi dan Kebutuhan Cairan Harian: Sains vs Mitos",
-    excerpt:
-      "Mengkaji mitos umum hidrasi dan apa yang disampaikan oleh riset medis terkini secara proporsional.",
-    readTime: "5 min baca",
-    date: "25 Juni 2026",
-    slug: "hidrasi-fakta-vs-mitos",
-  },
-  {
-    id: 6,
-    category: "Kualitas Air",
-    title: "Membaca Laporan Hasil Uji Kualitas Air Laboratorium",
-    excerpt:
-      "Panduan membaca parameter penting dalam laporan hasil uji laboratorium independen secara tepat.",
-    readTime: "10 min baca",
-    date: "20 Juni 2026",
-    slug: "cara-membaca-hasil-uji-air",
-  },
-];
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+  };
+}
 
 export default function ArticlesPage() {
+  const t = useTranslations("articles");
+
+  const categories = [
+    t("all"),
+    t("waterQuality"),
+    t("cleanAir"),
+    t("healthyFood"),
+    t("lifestyle"),
+    t("regulation"),
+  ];
+
+  const articles = [
+    {
+      id: 1,
+      category: t("waterQuality"),
+      title: t("article1Title"),
+      excerpt: t("article1Excerpt"),
+      readTime: t("article1ReadTime"),
+      date: t("article1Date"),
+      slug: "memahami-sistem-filtrasi-air",
+    },
+    {
+      id: 2,
+      category: t("cleanAir"),
+      title: t("article2Title"),
+      excerpt: t("article2Excerpt"),
+      readTime: t("article2ReadTime"),
+      date: t("article2Date"),
+      slug: "polutan-udara-dalam-ruangan",
+    },
+    {
+      id: 3,
+      category: t("healthyFood"),
+      title: t("article3Title"),
+      excerpt: t("article3Excerpt"),
+      readTime: t("article3ReadTime"),
+      date: t("article3Date"),
+      slug: "panduan-memilih-pangan-organik",
+    },
+    {
+      id: 4,
+      category: t("regulation"),
+      title: t("article4Title"),
+      excerpt: t("article4Excerpt"),
+      readTime: t("article4ReadTime"),
+      date: t("article4Date"),
+      slug: "regulasi-bpom-produk-air-minum",
+    },
+    {
+      id: 5,
+      category: t("lifestyle"),
+      title: t("article5Title"),
+      excerpt: t("article5Excerpt"),
+      readTime: t("article5ReadTime"),
+      date: t("article5Date"),
+      slug: "hidrasi-fakta-vs-mitos",
+    },
+    {
+      id: 6,
+      category: t("waterQuality"),
+      title: t("article6Title"),
+      excerpt: t("article6Excerpt"),
+      readTime: t("article6ReadTime"),
+      date: t("article6Date"),
+      slug: "cara-membaca-hasil-uji-air",
+    },
+  ];
+
   return (
     <div className="bg-white min-h-screen text-[#0a2342]">
       {/* Hero Header */}
@@ -82,13 +95,13 @@ export default function ArticlesPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <ScrollReveal direction="up" distance={30}>
             <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">
-              Artikel &amp; Edukasi
+              {t("badge")}
             </span>
             <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#0a2342] mt-2">
-              Pengetahuan Adalah Dasar Keputusan Sehat
+              {t("title")}
             </h1>
             <p className="text-gray-600 text-base mt-3 max-w-2xl leading-relaxed">
-              Seluruh sajian edukasi didasarkan pada data terverifikasi dan regulasi resmi — bukan janji manis pemasaran.
+              {t("description")}
             </p>
           </ScrollReveal>
         </div>
@@ -136,8 +149,8 @@ export default function ArticlesPage() {
 
                   <div className="pt-4 border-t border-gray-200 flex items-center justify-between text-xs text-gray-500 font-medium">
                     <span>{art.date}</span>
-                    <Link href={`/articles/${art.slug}`} className="font-bold text-[#0a2342] hover:text-[#2f6f5e] inline-flex items-center gap-1">
-                      Baca <ArrowRight size={12} />
+                    <Link href={`/articles/${art.slug}` as "/articles"} className="font-bold text-[#0a2342] hover:text-[#2f6f5e] inline-flex items-center gap-1">
+                      {t("read")} <ArrowRight size={12} />
                     </Link>
                   </div>
                 </article>

@@ -1,17 +1,20 @@
 "use client";
 
-import Link from "next/link";
 import { ShieldCheck, FileText, FlaskConical, Clock, ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import ScrollReveal from "@/components/ScrollReveal";
 
-const certs = [
-  { icon: FileText, code: "SNI", title: "Standar Nasional Indonesia", desc: "Standar keselamatan teknis" },
-  { icon: ShieldCheck, code: "BPOM", title: "Izin Edar BPOM", desc: "Perizinan resmi produk olah air" },
-  { icon: FlaskConical, code: "LAB TEST", title: "Uji Lab Independen", desc: "Verifikasi laboratorium terakreditasi" },
-  { icon: FileText, code: "ISO", title: "Sertifikasi ISO", desc: "Sistem manajemen mutu produk" },
-];
-
 export default function LegalitasStrip() {
+  const t = useTranslations("home.legalitas");
+
+  const certs = [
+    { icon: FileText, code: "SNI", title: t("sniTitle"), desc: t("sniDesc") },
+    { icon: ShieldCheck, code: "BPOM", title: t("bpomTitle"), desc: t("bpomDesc") },
+    { icon: FlaskConical, code: "LAB TEST", title: t("labTitle"), desc: t("labDesc") },
+    { icon: FileText, code: "ISO", title: t("isoTitle"), desc: t("isoDesc") },
+  ];
+
   return (
     <section className="py-20 bg-[#f9fafb] border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -20,19 +23,19 @@ export default function LegalitasStrip() {
           {/* Left Text */}
           <ScrollReveal direction="up" distance={30} className="lg:w-1/3 space-y-3">
             <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">
-              Transparansi Resmi
+              {t("badge")}
             </span>
             <h2 className="text-3xl font-bold tracking-tight text-[#0a2342]">
-              Legalitas &amp; Sertifikasi
+              {t("title")}
             </h2>
             <p className="text-gray-600 text-sm leading-relaxed">
-              Kami berkomitmen pada transparansi penuh. Kami hanya menampilkan sertifikasi yang benar-benar dimiliki atau sedang dalam tahap pengujian resmi.
+              {t("description")}
             </p>
             <Link
               href="/legalitas"
               className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e] hover:underline inline-flex items-center gap-1 pt-1"
             >
-              Lihat Detail Dokumen <ArrowRight size={14} />
+              {t("viewDocs")} <ArrowRight size={14} />
             </Link>
           </ScrollReveal>
 
@@ -48,7 +51,7 @@ export default function LegalitasStrip() {
                     <Icon size={16} />
                   </div>
                   <span className="text-[10px] font-semibold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200 inline-flex items-center gap-1">
-                    <Clock size={10} /> PROSES
+                    <Clock size={10} /> {t("process")}
                   </span>
                 </div>
 

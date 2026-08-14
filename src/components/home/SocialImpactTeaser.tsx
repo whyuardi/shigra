@@ -1,34 +1,19 @@
 "use client";
 
-import Link from "next/link";
 import { Heart, Droplets, MapPin, ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import ScrollReveal from "@/components/ScrollReveal";
 
-const programs = [
-  {
-    icon: Heart,
-    num: "500+",
-    unit: "Penerima Manfaat / Bulan",
-    title: "Program Makan Bergizi",
-    desc: "Menyediakan santapan bergizi seimbang setiap bulan untuk masyarakat yang membutuhkan di wilayah binaan.",
-  },
-  {
-    icon: Droplets,
-    num: "120",
-    unit: "Keluarga Terbantu",
-    title: "Subsidi Air Bersih",
-    desc: "Program subsidi penyediaan fasilitas dan filtrasi air bersih bagi keluarga prasejahtera.",
-  },
-  {
-    icon: MapPin,
-    num: "8",
-    unit: "Desa Binaan",
-    title: "Pendampingan Desa Sehat",
-    desc: "Mendampingi warga desa terpilih dalam membangun sanitasi dan pengelolaan air bersih berkelanjutan.",
-  },
-];
-
 export default function SocialImpactTeaser() {
+  const t = useTranslations("home.socialImpact");
+
+  const programs = [
+    { icon: Heart, num: "500+", unit: t("program1Unit"), title: t("program1Title"), desc: t("program1Desc") },
+    { icon: Droplets, num: "120", unit: t("program2Unit"), title: t("program2Title"), desc: t("program2Desc") },
+    { icon: MapPin, num: "8", unit: t("program3Unit"), title: t("program3Title"), desc: t("program3Desc") },
+  ];
+
   return (
     <section className="py-20 lg:py-28 bg-white border-b border-gray-100" aria-label="Social Impact">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -37,16 +22,10 @@ export default function SocialImpactTeaser() {
         <ScrollReveal direction="up" distance={30}>
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14 pb-6 border-b border-gray-100">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">
-                Tanggung Jawab Sosial
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#0a2342] mt-1">
-                Dampak Nyata Untuk Masyarakat
-              </h2>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#2f6f5e]">{t("badge")}</span>
+              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#0a2342] mt-1">{t("title")}</h2>
             </div>
-            <p className="text-gray-600 text-sm sm:text-base max-w-md">
-              Program sosial Shigra bukan kegiatan promosi — ini adalah bagian inti dari alasan utama mengapa ekosistem Shigra dibangun.
-            </p>
+            <p className="text-gray-600 text-sm sm:text-base max-w-md">{t("description")}</p>
           </div>
         </ScrollReveal>
 
@@ -61,7 +40,6 @@ export default function SocialImpactTeaser() {
                   </div>
                   <span className="text-xs font-medium text-gray-500">{unit}</span>
                 </div>
-
                 <div>
                   <div className="text-3xl sm:text-4xl font-bold text-[#0a2342] mb-1">{num}</div>
                   <h3 className="font-bold text-[#0a2342] text-base mb-2">{title}</h3>
@@ -76,11 +54,11 @@ export default function SocialImpactTeaser() {
         <ScrollReveal direction="up" distance={25} delay={0.2}>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-8 bg-[#0a2342] text-white rounded-2xl">
             <div>
-              <h3 className="text-xl font-bold mb-1">Ingin Tahu Lebih Lanjut Soal Program Sosial?</h3>
-              <p className="text-white/70 text-sm">Pelajari detail pelaksanaan dan transparansi laporan dampak sosial Shigra.</p>
+              <h3 className="text-xl font-bold mb-1">{t("ctaTitle")}</h3>
+              <p className="text-white/70 text-sm">{t("ctaDescription")}</p>
             </div>
             <Link href="/social-impact" className="btn-accent shrink-0 text-xs py-3 px-6">
-              Pelajari Program Sosial <ArrowRight size={14} />
+              {t("ctaButton")} <ArrowRight size={14} />
             </Link>
           </div>
         </ScrollReveal>
